@@ -34,7 +34,7 @@ data API 仅作回退」体系，全部建立在这条判断上：
 
 | 路径 | 页面自身请求成功 | 工具自身请求 `-102` |
 |---|---|---|
-| `/api/courses/HCEAP94S/homework_commons.json` | **2442** | 2 |
+| `/api/courses/DEMO0001/homework_commons.json` | **2442** | 2 |
 | `/api/tasks/pool.json` | 2417 | 0 |
 | `/api/users/p8sxailt2/courses.json` | 51 | **148** |
 | `/api/myshixuns/zq4bc7d276/challenges.json` | 0 | 1 |

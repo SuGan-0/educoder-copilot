@@ -78,12 +78,12 @@ function withTempRoot() {
 }
 
 const ITEM_A = {
-  course: '机器学习',
+  course: '示例课程B',
   experiment: '第1课时：模型评估',
   level: '第2关 留出法',
   level_id: 'L002',
   identifier: 'zq75a64d2b22',
-  url: 'https://www.educoder.net/tasks/HCEAP94S/88000001/zq75a64d2b22?coursesId=HCEAP94S',
+  url: 'https://www.educoder.net/tasks/DEMO0001/88000001/zq75a64d2b22?coursesId=DEMO0001',
   reason: 'no-answer'
 };
 
@@ -321,12 +321,12 @@ const os = require('node:os');
 
 const ROOT = path.join(__dirname, '..');
 const ITEM = {
-  course: '机器学习',
+  course: '示例课程B',
   experiment: '第1课时：模型评估',
   level: '第2关 留出法',
   level_id: 'L002',
   identifier: 'zq75a64d2b22',
-  url: 'https://www.educoder.net/tasks/HCEAP94S/88000001/zq75a64d2b22',
+  url: 'https://www.educoder.net/tasks/DEMO0001/88000001/zq75a64d2b22',
   reason: 'no-answer'
 };
 
@@ -522,7 +522,7 @@ test('引擎：只提取答案模式只写 answers，不写 levels.jsonl / md / 
     }
   };
   fake.state.ownResponses = [
-    ['api/courses/HCEAP94S/homework_commons.json', JSON.stringify(EXPERIMENTS)],
+    ['api/courses/DEMO0001/homework_commons.json', JSON.stringify(EXPERIMENTS)],
     ['api/myshixuns/zq3a1b66ee/challenges.json', JSON.stringify([
       { identifier: 'conv', subject: 'conv', homework_challenge_index: 1, with_code_file: true, chooses: [] },
       { identifier: 'pool', subject: 'pool', homework_challenge_index: 2, with_code_file: true, chooses: [] }
@@ -1473,7 +1473,7 @@ const vm = require('node:vm');
 
 const SOURCE = fs.readFileSync(path.join(__dirname, '..', 'userscript', 'educoder-autosubmit.user.js'), 'utf8');
 
-function loadHooks({ pathname = '/tasks/HCEAP94S/88000001/zq75a64d2b22', search = '' } = {}) {
+function loadHooks({ pathname = '/tasks/DEMO0001/88000001/zq75a64d2b22', search = '' } = {}) {
   const hooks = {};
   const fakeDocument = {
     querySelectorAll: () => [],
@@ -1615,12 +1615,12 @@ test('每关动作判定：未选中 → 虚拟机 → 已通过 → 无答案 �
 test('缺答案上报载荷：字段齐全、编号是 L00N', () => {
   const hooks = loadHooks();
   const item = hooks.buildMissingItem({
-    course: '机器学习',
+    course: '示例课程B',
     experiment: '第1课时',
     levelName: '第2关 留出法',
     position: 2,
     identifier: 'zq75a64d2b22',
-    url: 'https://www.educoder.net/tasks/HCEAP94S/88000001/zq75a64d2b22'
+    url: 'https://www.educoder.net/tasks/DEMO0001/88000001/zq75a64d2b22'
   });
   assert.equal(item.level_id, 'L002');
   assert.equal(item.reason, 'no-answer');
@@ -1650,12 +1650,12 @@ test('队首匹配：序号命中即续跑、不命中不续；handoff 超过 90
 
 test('URL 回退：把最后一段换成上一关标识，查询串保留', () => {
   const hooks = loadHooks({
-    pathname: '/tasks/HCEAP94S/88000001/zq75a64d2b22',
-    search: '?coursesId=HCEAP94S'
+    pathname: '/tasks/DEMO0001/88000001/zq75a64d2b22',
+    search: '?coursesId=DEMO0001'
   });
   assert.equal(
     hooks.urlForLevelIdentifier('abc123'),
-    'https://www.educoder.net/tasks/HCEAP94S/88000001/abc123?coursesId=HCEAP94S'
+    'https://www.educoder.net/tasks/DEMO0001/88000001/abc123?coursesId=DEMO0001'
   );
 });
 

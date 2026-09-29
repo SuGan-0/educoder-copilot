@@ -76,7 +76,7 @@
   "items": [
     {
       "id": "稳定哈希(course|experiment|identifier|url)",
-      "course": "机器学习",
+      "course": "示例课程B",
       "experiment": "第1课时：…",
       "level": "第2关 留出法",
       "level_id": "L002",
