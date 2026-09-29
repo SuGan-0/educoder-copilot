@@ -37,7 +37,7 @@ data API 仅作回退」体系，全部建立在这条判断上：
 | `/api/courses/HCEAP94S/homework_commons.json` | **2442** | 2 |
 | `/api/tasks/pool.json` | 2417 | 0 |
 | `/api/users/p8sxailt2/courses.json` | 51 | **148** |
-| `/api/myshixuns/qysckn796f/challenges.json` | 0 | 1 |
+| `/api/myshixuns/zq4bc7d276/challenges.json` | 0 | 1 |
 
 同一个 origin、同一个会话 cookie、同样的 `zzud=p8sxailt2`、同一台机器同一个浏览器，
 页面发的成功、工具发的被拒。**唯一变量是请求头。**
@@ -308,7 +308,7 @@ function signingHeaders(method = 'GET') {
 
 | 项 | 标准 |
 |---|---|
-| 功能等价 | 同一账号下：课程 10 门、机器学习_2026年下半年 5 个实验，与页面一致 |
+| 功能等价 | 同一账号下：课程 10 门、示例课程B 5 个实验，与页面一致 |
 | 关卡完整 | CNN 1→5、面向对象分析与设计 1→11，序号连续无缺号 |
 | 产物不变 | 重跑后 `levels.jsonl` 与 `实验.md` 与优化前逐字节一致（除 `capturedAt`） |
 | 性能 | 抓完 CNN 5 关的**页面交互等待**应大幅下降（现状：每关导航 + 网络空闲 + `sleep(1500)`×N） |

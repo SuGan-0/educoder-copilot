@@ -80,7 +80,7 @@
       "experiment": "第1课时：…",
       "level": "第2关 留出法",
       "level_id": "L002",
-      "identifier": "vnf9hpj8sx7i",
+      "identifier": "zq75a64d2b22",
       "url": "https://www.educoder.net/tasks/…",
       "reason": "no-answer",
       "reported_at": "2026-09-28T12:00:00.000Z"

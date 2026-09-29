@@ -82,8 +82,8 @@ const ITEM_A = {
   experiment: '第1课时：模型评估',
   level: '第2关 留出法',
   level_id: 'L002',
-  identifier: 'vnf9hpj8sx7i',
-  url: 'https://www.educoder.net/tasks/HCEAP94S/3965742/vnf9hpj8sx7i?coursesId=HCEAP94S',
+  identifier: 'zq75a64d2b22',
+  url: 'https://www.educoder.net/tasks/HCEAP94S/88000001/zq75a64d2b22?coursesId=HCEAP94S',
   reason: 'no-answer'
 };
 
@@ -325,8 +325,8 @@ const ITEM = {
   experiment: '第1课时：模型评估',
   level: '第2关 留出法',
   level_id: 'L002',
-  identifier: 'vnf9hpj8sx7i',
-  url: 'https://www.educoder.net/tasks/HCEAP94S/3965742/vnf9hpj8sx7i',
+  identifier: 'zq75a64d2b22',
+  url: 'https://www.educoder.net/tasks/HCEAP94S/88000001/zq75a64d2b22',
   reason: 'no-answer'
 };
 
@@ -523,7 +523,7 @@ test('引擎：只提取答案模式只写 answers，不写 levels.jsonl / md / 
   };
   fake.state.ownResponses = [
     ['api/courses/HCEAP94S/homework_commons.json', JSON.stringify(EXPERIMENTS)],
-    ['api/myshixuns/sb5zfhoq8g/challenges.json', JSON.stringify([
+    ['api/myshixuns/zq3a1b66ee/challenges.json', JSON.stringify([
       { identifier: 'conv', subject: 'conv', homework_challenge_index: 1, with_code_file: true, chooses: [] },
       { identifier: 'pool', subject: 'pool', homework_challenge_index: 2, with_code_file: true, chooses: [] }
     ])],
@@ -555,14 +555,14 @@ test('引擎：只提取答案模式只写 answers，不写 levels.jsonl / md / 
   await engine.run();
 
   // ① 答案文件照写：只有已通过的 conv（代码内容来自 rep_content，与「已提交的代码」同口径）
-  const answerPath = path.join(exportRoot, 'answers', '机器学习_2026年下半年__CNN.answers.json');
+  const answerPath = path.join(exportRoot, 'answers', '示例课程B__CNN.answers.json');
   const document = JSON.parse(fs.readFileSync(answerPath, 'utf8'));
   assert.deepEqual(document.answers.map((item) => item.level_id), ['L001']);
   assert.equal(document.answers[0].kind, 'code');
   assert.match(String(document.answers[0].answer), /print\("starter"\)/);
 
   // ② 题目存档一律不写：连实验目录都不该出现（levels.jsonl / 实验.md / assets 都在它下面）
-  const experimentDir = path.join(exportRoot, '机器学习_2026年下半年', 'CNN');
+  const experimentDir = path.join(exportRoot, '示例课程B', 'CNN');
   assert.equal(
     fs.existsSync(experimentDir),
     false,
@@ -1153,18 +1153,18 @@ git commit -m "tools(probe): 教学课程摸底探针（签名请求/入口按�
 
 - **签名**：带签名请求全部可用；无签名对照 `courses.json` 返回 `{"status":-102,...}`（签名必须带）。
 - **课程来源**：`courses.json` 是**课堂**列表（`subject_id`/`subject_identifier` 全为 `null`），**不是**教学课程；
-  教学课程入口是 `/paths/{identifier}`（identifier 为字符串，如 `9i8a7og6`；首页里的推荐课也有数字型 `/paths/13007`）。
+  教学课程入口是 `/paths/{identifier}`（identifier 为字符串，如 `zq3026ca`；首页里的推荐课也有数字型 `/paths/13007`）。
   未找到「我的教学课程列表」接口（首页 `home/index.json` 只有推荐内容）→ 面板课程来源 = **当前 /paths 页自动识别 + 本地缓存**。
 - **课程信息**：`GET /api/paths/{identifier}.json?identifier=&id=`（带签名）→ `{ id: 10084, name: "OSS Development 开源软件技术" }`。
 - **课程结构（stages）**：`GET /api/v2/stages.json?tab=&stage_id=&stage_item_id=&show_course_section=false&subject_id={identifier}&keywords=&zzud={login}`
   → `status:0`、课时 16、课程实验 15（页面自身发同一 URL；`zzud` 用账号 login）。
 - **课程实验入口按钮文案：`继续挑战`**（同页还有「跳过，我自己来 / 预览」，不在候选模式里，不会误点）；
-  点击后落点 `https://www.educoder.net/tasks/iobjy4n8692m`。
+  点击后落点 `https://www.educoder.net/tasks/zq2e3c066d33`。
 - **关卡页 URL 形态：单段式 `/tasks/{关卡标识}`**（无查询串）→ `currentLevelId()` 取最后一段即可；回退链首用「替换最后一段」。
 - **「上一关」控件：没有**（该实验只有 1 关，落点即第 1 关）→ 回退链首按 `prev_game` + URL 替换实现（原后备路径转正）。
 - **task JSON 字段可用**：`prev_game=null / next_game=null / position=1 / homework_challenge_index=1 / score=100 / final_score=0`；
   **多关链未实测**（该课程每个课程实验都只有 1 关）——字段与课堂同构，`next_game` 机制留到 C7 真机验证。
-- **实训页自身请求**：`/api/shixuns/{eipukga6}/challenges.json?id={id}`（脚本直取的 URL 形状正确）。
+- **实训页自身请求**：`/api/shixuns/{zqbda7a6}/challenges.json?id={id}`（脚本直取的 URL 形状正确）。
 
 ---
 
@@ -1473,7 +1473,7 @@ const vm = require('node:vm');
 
 const SOURCE = fs.readFileSync(path.join(__dirname, '..', 'userscript', 'educoder-autosubmit.user.js'), 'utf8');
 
-function loadHooks({ pathname = '/tasks/HCEAP94S/3965742/vnf9hpj8sx7i', search = '' } = {}) {
+function loadHooks({ pathname = '/tasks/HCEAP94S/88000001/zq75a64d2b22', search = '' } = {}) {
   const hooks = {};
   const fakeDocument = {
     querySelectorAll: () => [],
@@ -1526,7 +1526,7 @@ const STAGES_SAMPLE = {
           {
             item_type: 'Shixun',
             name: '开源软件及其开发概述（课堂 lecture）',
-            identifier: 'eipukga6',
+            identifier: 'zqbda7a6',
             challenges_count: 1,
             finished_challenges_count: 0,
             is_jupyter: false,
@@ -1541,7 +1541,7 @@ const STAGES_SAMPLE = {
           {
             item_type: 'Shixun',
             name: 'CI/CD（上机实习）',
-            identifier: 'zjc27fbp',
+            identifier: 'zqbf6766',
             challenges_count: 3,
             finished_challenges_count: 1,
             is_jupyter: true,
@@ -1554,11 +1554,11 @@ const STAGES_SAMPLE = {
 };
 
 test('发现层：课程信息与当前路径识别', () => {
-  const hooks = loadHooks({ pathname: '/paths/9i8a7og6' });
-  assert.equal(hooks.parseCurrentPathIdentifier(), '9i8a7og6');
+  const hooks = loadHooks({ pathname: '/paths/zq3026ca' });
+  assert.equal(hooks.parseCurrentPathIdentifier(), 'zq3026ca');
   assert.deepEqual(
-    hooks.parsePathCourse('9i8a7og6', { id: 10084, name: 'OSS Development 开源软件技术' }),
-    { identifier: '9i8a7og6', id: 10084, name: 'OSS Development 开源软件技术' }
+    hooks.parsePathCourse('zq3026ca', { id: 10084, name: 'OSS Development 开源软件技术' }),
+    { identifier: 'zq3026ca', id: 10084, name: 'OSS Development 开源软件技术' }
   );
 });
 
@@ -1569,7 +1569,7 @@ test('发现层：课程实验摊平且只留 Shixun（含虚拟机标记与进�
   assert.deepEqual(rows[0], {
     stageName: '第一课时：开源软件及其开发概述（课堂 lecture）',
     name: '开源软件及其开发概述（课堂 lecture）',
-    identifier: 'eipukga6',
+    identifier: 'zqbda7a6',
     challenges: 1,
     finished: 0,
     jupyter: false
@@ -1594,12 +1594,12 @@ test('队列构建：默认全选、按勾选过滤、虚拟机实验剔除', ()
   const hooks = loadHooks();
   const experiments = hooks.parseCourseExperiments(STAGES_SAMPLE);
   const levelsByExperiment = {
-    eipukga6: [{ name: '第1关', position: 1 }, { name: '第2关', position: 2 }]
+    zqbda7a6: [{ name: '第1关', position: 1 }, { name: '第2关', position: 2 }]
   };
-  const all = hooks.buildTeachQueue(experiments, { experiments: ['eipukga6', 'zjc27fbp'], levels: {} }, levelsByExperiment);
+  const all = hooks.buildTeachQueue(experiments, { experiments: ['zqbda7a6', 'zqbf6766'], levels: {} }, levelsByExperiment);
   assert.equal(all.total, 2, '默认 = 该实验全部关卡');
   assert.deepEqual(all.skippedJupyter, ['CI/CD（上机实习）']);
-  const partial = hooks.buildTeachQueue(experiments, { experiments: ['eipukga6'], levels: { eipukga6: [2] } }, levelsByExperiment);
+  const partial = hooks.buildTeachQueue(experiments, { experiments: ['zqbda7a6'], levels: { zqbda7a6: [2] } }, levelsByExperiment);
   assert.deepEqual(partial.experiments[0].positions, [2], '勾选了的按勾选来');
 });
 
@@ -1619,12 +1619,12 @@ test('缺答案上报载荷：字段齐全、编号是 L00N', () => {
     experiment: '第1课时',
     levelName: '第2关 留出法',
     position: 2,
-    identifier: 'vnf9hpj8sx7i',
-    url: 'https://www.educoder.net/tasks/HCEAP94S/3965742/vnf9hpj8sx7i'
+    identifier: 'zq75a64d2b22',
+    url: 'https://www.educoder.net/tasks/HCEAP94S/88000001/zq75a64d2b22'
   });
   assert.equal(item.level_id, 'L002');
   assert.equal(item.reason, 'no-answer');
-  assert.equal(item.identifier, 'vnf9hpj8sx7i');
+  assert.equal(item.identifier, 'zq75a64d2b22');
 });
 
 test('队首匹配：序号命中即续跑、不命中不续；handoff 超过 90 秒视为过期', () => {
@@ -1638,7 +1638,7 @@ test('队首匹配：序号命中即续跑、不命中不续；handoff 超过 90
     expected: { identifier: '', position: 0 }
   };
   assert.equal(
-    hooks.queueMatchesCurrent(queue, { identifier: 'vnf9hpj8sx7i', position: 2, href: 'https://www.educoder.net/tasks/a/b/vnf9hpj8sx7i' }),
+    hooks.queueMatchesCurrent(queue, { identifier: 'zq75a64d2b22', position: 2, href: 'https://www.educoder.net/tasks/a/b/zq75a64d2b22' }),
     true
   );
   assert.equal(
@@ -1650,12 +1650,12 @@ test('队首匹配：序号命中即续跑、不命中不续；handoff 超过 90
 
 test('URL 回退：把最后一段换成上一关标识，查询串保留', () => {
   const hooks = loadHooks({
-    pathname: '/tasks/HCEAP94S/3965742/vnf9hpj8sx7i',
+    pathname: '/tasks/HCEAP94S/88000001/zq75a64d2b22',
     search: '?coursesId=HCEAP94S'
   });
   assert.equal(
     hooks.urlForLevelIdentifier('abc123'),
-    'https://www.educoder.net/tasks/HCEAP94S/3965742/abc123?coursesId=HCEAP94S'
+    'https://www.educoder.net/tasks/HCEAP94S/88000001/abc123?coursesId=HCEAP94S'
   );
 });
 
